@@ -7,6 +7,7 @@ package com.shaheen.unit10activity;
 public class Comment {
     private long id;
     private String comment;
+    private String rating;
 
     public long getId() {
         return id;
@@ -24,9 +25,16 @@ public class Comment {
         this.comment = comment;
     }
 
-    // Will be used by the ArrayAdapter in the ListView
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
-        return comment;
+        return comment + " - " + rating;
     }
 }

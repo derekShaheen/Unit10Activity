@@ -13,20 +13,24 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_COMMENTS = "comments"; // Name of the table
     public static final String COLUMN_ID = "_id";           // Primary key column
     public static final String COLUMN_COMMENT = "comment";  // Name of comment field
+    public static final String COLUMN_RATING = "rating";    // Name of the rating field
 
     private static final String DATABASE_NAME = "commments.db"; // Name of db file
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 6;
 
     /**
      * Database creation sql statement
      * CREATE TABLE comments
      *              (_id integer primary key autoincrement,
-     *              comment text not null)
+     *              comment text not null,
+     *              rating text not null);
      */
     private static final String DATABASE_CREATE = "create table "
-            + TABLE_COMMENTS + "( " + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_COMMENT
-            + " text not null);";
+            + TABLE_COMMENTS + "( "
+            + COLUMN_ID  + " integer primary key autoincrement, "
+            + COLUMN_COMMENT + " text not null, "
+            + COLUMN_RATING + " text not null"
+            + ");";
 
     /**
      * Constructor

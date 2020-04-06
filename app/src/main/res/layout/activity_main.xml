@@ -13,15 +13,33 @@
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add New"
-            android:onClick="onClick"/>
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:text="Add New" />
 
         <Button
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete First"
-            android:onClick="onClick"/>
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:text="Delete First" />
+
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Enter Rating:" />
+
+        <EditText
+            android:id="@+id/etRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Rating"
+            android:inputType="number" />
 
     </LinearLayout>
 

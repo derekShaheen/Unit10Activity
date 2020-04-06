@@ -18,8 +18,10 @@ public class CommentsDataSource {
     // Database fields
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
+
     private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_COMMENT };
+            MySQLiteHelper.COLUMN_COMMENT,
+            MySQLiteHelper.COLUMN_RATING};
 
     public CommentsDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -38,9 +40,11 @@ public class CommentsDataSource {
      * @param comment Specify a string to create a comment
      * @return
      */
-    public Comment createComment(String comment) {
+    public Comment createComment(String comment, String rating) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_COMMENT, comment);
+        values.put(MySQLiteHelper.COLUMN_RATING, rating);
+
         /**
          * INSERT comments (comment)
          */
@@ -80,8 +84,7 @@ public class CommentsDataSource {
     public List<Comment> getAllComments() {
         List<Comment> comments = new ArrayList<Comment>();
 
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_COMMENTS,
-                allColumns, null, null, null, null, null);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_COMMENTS, null, null, null, null, null, null);
         // Create the cursor, move it to the first record
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) { // Then loop over that cursor for all records
@@ -97,6 +100,7 @@ public class CommentsDataSource {
     private Comment cursorToComment(Cursor cursor) {
         Comment comment = new Comment();
         comment.setId(cursor.getLong(cursor.getColumnIndex(MySQLiteHelper.COLUMN_ID)));
+        comment.setRating(cursor.getString( cursor.getColumnIndex( MySQLiteHelper.COLUMN_RATING ) ));
         comment.setComment(cursor.getString(1));
         return comment;
     }

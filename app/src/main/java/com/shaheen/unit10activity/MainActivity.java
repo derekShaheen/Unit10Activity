@@ -7,11 +7,13 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 
 public class MainActivity extends ListActivity {
 
     private CommentsDataSource datasource;
+    private EditText etRatings;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class MainActivity extends ListActivity {
         ArrayAdapter<Comment> adapter = new ArrayAdapter<Comment>(this,
                 android.R.layout.simple_list_item_1, values);
         setListAdapter(adapter);
+
+        etRatings = (EditText) findViewById(R.id.etRating);
     }
 
     // Will be called via the onClick attribute
@@ -38,10 +42,11 @@ public class MainActivity extends ListActivity {
         Comment comment = null;
         switch (view.getId()) {
             case R.id.add:
+                String ratingPass = etRatings.getText() + "";
                 String[] comments = new String[] { "Cool", "Very nice", "Hate it" };
                 int nextInt = new Random().nextInt(3);
                 // save the new comment to the database
-                comment = datasource.createComment(comments[nextInt]);
+                comment = datasource.createComment(comments[nextInt], ratingPass);
                 adapter.add(comment);
                 break;
             case R.id.delete:
